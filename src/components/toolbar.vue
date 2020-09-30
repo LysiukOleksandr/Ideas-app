@@ -7,9 +7,12 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn icon class="mr-10">
+      <v-btn text color="white" class="mr-10" router to="/login">
         Login
       </v-btn>
+      <!-- <v-btn icon class="mr-10" >
+        Log out
+      </v-btn> -->
     </v-toolbar>
     <v-navigation-drawer
       v-model="drawer"
