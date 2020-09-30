@@ -1,6 +1,6 @@
 <template>
   <v-card height="85px" flat tile>
-    <v-toolbar class="deep-purple darken-2" dark>
+    <v-toolbar class="primary" dark>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-toolbar-title>Ideas App</v-toolbar-title>
@@ -17,7 +17,7 @@
     <v-navigation-drawer
       v-model="drawer"
       app
-      class="deep-purple darken-2"
+      class="primary"
       temporary
       dark
       overlay-opacity="0.7"
@@ -31,7 +31,7 @@
             :to="item.route"
           >
             <v-list-item-icon>
-              <v-icon v-text="item.icon" color="orange lighten-3"></v-icon>
+              <v-icon v-text="item.icon" color="orange darken-1"></v-icon>
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title>{{ item.text }}</v-list-item-title>

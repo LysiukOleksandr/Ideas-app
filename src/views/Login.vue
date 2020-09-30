@@ -6,16 +6,22 @@
       </v-card-title>
       <v-form>
         <v-row justify="center">
-          <v-col cols="12" sm="8" class="pt-0 pb-0">
-            <v-text-field label="Email" v-model="email"></v-text-field>
+          <v-col cols="12" sm="8" class="pt-0 pb-0 ">
+            <v-text-field
+              label="Email"
+              v-model="email"
+              class="pl-5 pr-5"
+            ></v-text-field>
           </v-col>
           <v-col cols="12" sm="8" class="pt-2 pb-0">
-            <v-text-field label="Password" v-model="password"></v-text-field>
+            <v-text-field
+              label="Password"
+              v-model="password"
+              class="pl-5 pr-5"
+            ></v-text-field>
           </v-col>
           <v-col cols="12" sm="8" class="mt-2 text-center">
-            <v-btn class="deep-purple darken-2" dark width="130" type="submit"
-              >Log in</v-btn
-            >
+            <v-btn class="primary" dark width="130" type="submit">Log in</v-btn>
           </v-col>
           <v-col cols="12" sm="8" class="mb-5 pt-0 text-center">
             <div>
