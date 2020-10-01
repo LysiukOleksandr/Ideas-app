@@ -8,7 +8,7 @@
       <v-spacer></v-spacer>
 
       <v-btn text color="white" class="mr-10" router to="/login">
-        Login
+        Войти
       </v-btn>
       <!-- <v-btn icon class="mr-10" >
         Log out
@@ -51,8 +51,8 @@ export default {
       drawer: false,
       elem: 1,
       items: [
-        { text: "Home", icon: "mdi-home", route: "/" },
-        { text: "About", icon: "mdi-information", route: "/about" }
+        { text: "Домашняя", icon: "mdi-home", route: "/" },
+        { text: "О проекте", icon: "mdi-information", route: "/about" }
       ]
     };
   }

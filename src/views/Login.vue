@@ -2,35 +2,37 @@
   <v-container>
     <v-card max-width="550px" class="mx-auto">
       <v-card-title class="justify-center mt-2 mb-3" style="font-size:35px">
-        Log in
+        Авторизация
       </v-card-title>
       <v-form>
         <v-row justify="center">
           <v-col cols="12" sm="8" class="pt-0 pb-0 ">
             <v-text-field
-              label="Email"
+              label="Почта"
               v-model="email"
               class="pl-5 pr-5"
             ></v-text-field>
           </v-col>
           <v-col cols="12" sm="8" class="pt-2 pb-0">
             <v-text-field
-              label="Password"
+              label="Пароль"
               v-model="password"
               class="pl-5 pr-5"
             ></v-text-field>
           </v-col>
           <v-col cols="12" sm="8" class="mt-2 text-center">
-            <v-btn class="primary" dark width="130" type="submit">Log in</v-btn>
+            <v-btn class="primary" dark width="200" type="submit"
+              >Авторизоваться</v-btn
+            >
           </v-col>
           <v-col cols="12" sm="8" class="mb-5 pt-0 text-center">
             <div>
-              New to ideas app?
+              Нет аккаунта?
               <router-link
                 class="text-decoration-none"
                 router
                 to="/registration"
-                >Get started</router-link
+                >Начать</router-link
               >
             </div>
           </v-col>
