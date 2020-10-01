@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <h2 class="text-center mb-5">Хотите предложить новую тему для видео?</h2>
-    <v-card class="mx-auto" max-width="500">
+    <v-card class="mx-auto" max-width="600">
       <v-form class="justify-center">
         <v-row justify="center">
           <v-col cols="12" sm="12" class="pb-0 pt-0">
