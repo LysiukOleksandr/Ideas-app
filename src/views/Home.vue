@@ -1,17 +1,17 @@
 <template>
   <div class="home">
     <v-container>
-      <text-field></text-field>
+      <add-form></add-form>
     </v-container>
   </div>
 </template>
 
 <script>
-import TextField from "../components/text-field.vue";
+import AddForm from "../components/add-form.vue";
 export default {
   name: "Home",
   components: {
-    "text-field": TextField
+    "add-form": AddForm
   }
 };
 </script>
