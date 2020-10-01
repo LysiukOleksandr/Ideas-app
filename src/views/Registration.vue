@@ -4,27 +4,38 @@
       <v-card-title class="justify-center mt-2 mb-3" style="font-size:35px">
         Регистрация
       </v-card-title>
-      <v-form>
+      <v-form @submit.prevent="onSubmit">
         <v-row justify="center">
           <v-col cols="12" sm="8" class="pt-0 pb-0">
             <v-text-field
+              v-model.trim="email"
+              :error-messages="emailErrors"
+              @blur="$v.email.$touch()"
+              class="pl-5 pr-5"
               label="Почта"
-              v-model="email"
-              class="pl-5 pr-5"
+              required
             ></v-text-field>
           </v-col>
           <v-col cols="12" sm="8" class="pt-2 pb-0">
             <v-text-field
-              label="Пароль"
               v-model="password"
+              :type="showPassword ? 'text' : 'password'"
+              :error-messages="passwordErrors"
+              @blur="$v.password.$touch()"
               class="pl-5 pr-5"
+              label="Пароль"
+              required
             ></v-text-field>
           </v-col>
           <v-col cols="12" sm="8" class="pt-2 pb-0">
             <v-text-field
-              label="Повторите пароль"
-              v-model="repeatPassword"
+              v-model="confirmPassword"
+              :type="showPassword ? 'text' : 'password'"
+              :error-messages="confirmPasswordErrors"
+              @blur="$v.confirmPassword.$touch()"
               class="pl-5 pr-5"
+              label="Повторите пароль"
+              required
             ></v-text-field>
           </v-col>
           <v-col cols="12" sm="8" class="mt-2 mb-0 pt-0 pb-0 text-center">
@@ -42,15 +53,70 @@
 </template>
 
 <script>
+import { required, minLength, email, sameAs } from "vuelidate/lib/validators";
 export default {
   name: "Registration",
   data() {
     return {
       email: "",
       password: "",
-      repeatPassword: "",
-      agree: false
+      confirmPassword: "",
+      showPassword: false,
+      agree: false,
+      submitStatus: null
     };
+  },
+  methods: {
+    onSubmit() {
+      this.$v.$touch();
+      if (!this.$v.$invalid && this.agree) {
+        this.submitStatus = "PENDING";
+        console.log("submit");
+      } else if (!this.$v.$invalid && !this.agree) {
+        alert("Пожалуйста, согласитесь с нашими правилами");
+      } else {
+        this.submitStatus = "error";
+      }
+    }
+  },
+  computed: {
+    emailErrors() {
+      const errors = [];
+      if (!this.$v.email.$dirty) return errors;
+      !this.$v.email.email && errors.push("Неправильная почта");
+      !this.$v.email.required && errors.push("Это поле обязательно");
+      return errors;
+    },
+    passwordErrors() {
+      const errors = [];
+      if (!this.$v.password.$dirty) return errors;
+      !this.$v.password.minLength &&
+        errors.push("Пароль должен быть длиннее 5 символов");
+      !this.$v.password.required && errors.push("Это поле обязательно");
+      return errors;
+    },
+    confirmPasswordErrors() {
+      const errors = [];
+      if (!this.$v.confirmPassword.$dirty) return errors;
+      !this.$v.confirmPassword.sameAsPassword &&
+        errors.push("Пароли не совпадают");
+      !this.$v.confirmPassword.required && errors.push("Это поле обязательно");
+      return errors;
+    }
+  },
+  validations: {
+    email: {
+      required,
+      email
+    },
+    password: {
+      required,
+      minLength: minLength(5)
+    },
+    confirmPassword: {
+      required,
+      sameAsPassword: sameAs("password")
+    }
   }
 };
 </script>
