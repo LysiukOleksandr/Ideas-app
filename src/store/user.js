@@ -31,5 +31,12 @@ export default {
       commit("SET_USER", userData);
     }
   },
-  getters: {}
+  getters: {
+    getUser: state => {
+      return state.user.email;
+    },
+    checkUser: state => {
+      return state.user.uid !== null;
+    }
+  }
 };

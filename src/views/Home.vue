@@ -18,6 +18,7 @@ export default {
     "add-form": AddForm,
     categories: Categories,
     "ideas-list": IdeasList
-  }
+  },
+  created() {}
 };
 </script>
