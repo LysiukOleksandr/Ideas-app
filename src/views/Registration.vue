@@ -70,7 +70,21 @@ export default {
     onSubmit() {
       this.$v.$touch();
       if (!this.$v.$invalid && this.agree) {
-        this.submitStatus = "PENDING";
+        this.submitStatus = "submit";
+        const user = {
+          email: this.email,
+          password: this.password
+        };
+        this.$store
+          .dispatch("registerUser", user)
+          .then(() => {
+            alert("Вы успешно зарегистрированы");
+            this.$router.push("/");
+          })
+          .catch(error => {
+            alert(`Возникла ошибка - ${error}`);
+          });
+
         console.log("submit");
       } else if (!this.$v.$invalid && !this.agree) {
         alert("Пожалуйста, согласитесь с нашими правилами");
@@ -91,7 +105,7 @@ export default {
       const errors = [];
       if (!this.$v.password.$dirty) return errors;
       !this.$v.password.minLength &&
-        errors.push("Пароль должен быть длиннее 5 символов");
+        errors.push("Пароль должен быть длиннее 6 символов");
       !this.$v.password.required && errors.push("Это поле обязательно");
       return errors;
     },
@@ -111,7 +125,7 @@ export default {
     },
     password: {
       required,
-      minLength: minLength(5)
+      minLength: minLength(6)
     },
     confirmPassword: {
       required,
