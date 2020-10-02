@@ -5,7 +5,8 @@ export default {
     user: {
       userId: null,
       email: null
-    }
+    },
+    error: null
   },
   mutations: {
     SET_USER(state, { userId, email }) {
@@ -13,15 +14,23 @@ export default {
         userId: userId,
         email: email
       };
+    },
+    SET_ERROR(state, error) {
+      state.error = error;
+    },
+    CLEAR_ERROR(state) {
+      state.error = null;
     }
   },
   actions: {
     async registerUser({ commit }, { email, password }) {
+      commit("CLEAR_ERROR");
       const user = await firebase
         .auth()
         .createUserWithEmailAndPassword(email, password)
         .catch(error => {
           console.log(error);
+          commit("SET_ERROR", error.message);
         });
       const userData = {
         userId: user.user.uid,
@@ -37,6 +46,9 @@ export default {
     },
     checkUser: state => {
       return state.user.userId !== null;
+    },
+    getError: state => {
+      return state.error;
     }
   }
 };

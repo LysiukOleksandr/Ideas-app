@@ -81,11 +81,13 @@ export default {
             alert("Вы успешно зарегистрированы");
             this.$router.push("/");
           })
-          .catch(error => {
-            alert(`Возникла ошибка - ${error}`);
+          .catch(() => {
+            alert(this.$store.getters.getError);
+            this.email = "";
+            this.password = "";
+            this.confirmPassword = "";
+            this.agree = false;
           });
-
-        console.log("submit");
       } else if (!this.$v.$invalid && !this.agree) {
         alert("Пожалуйста, согласитесь с нашими правилами");
       } else {
