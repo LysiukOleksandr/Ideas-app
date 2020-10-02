@@ -3,8 +3,8 @@ import firebase from "firebase/app";
 export default {
   state: {
     user: {
-      userId: "",
-      email: ""
+      userId: null,
+      email: null
     }
   },
   mutations: {
@@ -36,7 +36,7 @@ export default {
       return state.user.email;
     },
     checkUser: state => {
-      return state.user.uid !== null;
+      return state.user.userId !== null;
     }
   }
 };
