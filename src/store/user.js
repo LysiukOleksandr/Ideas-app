@@ -41,7 +41,7 @@ export default {
     }
   },
   getters: {
-    getUser: state => {
+    getEmail: state => {
       return state.user.email;
     },
     checkUser: state => {

@@ -7,12 +7,20 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn text color="white" class="mr-5" router to="/login">
+      <v-btn
+        text
+        color="white"
+        class="mr-5"
+        router
+        to="/login"
+        v-if="!checkUser"
+      >
         Войти
       </v-btn>
-      <!-- <v-btn icon class="mr-10" >
+      <v-btn text color="white" class="mr-5" v-else>
         Log out
-      </v-btn> -->
+      </v-btn>
+      <h4>{{ getEmail }}</h4>
     </v-toolbar>
     <v-navigation-drawer
       v-model="drawer"
@@ -61,6 +69,14 @@ export default {
         { text: "Вход", icon: "mdi-login", route: "/login" }
       ]
     };
+  },
+  computed: {
+    getEmail() {
+      return this.$store.getters.getEmail;
+    },
+    checkUser() {
+      return this.$store.getters.checkUser;
+    }
   }
 };
 </script>

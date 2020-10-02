@@ -4,19 +4,26 @@
       <v-card-title class="justify-center mt-2 mb-3" style="font-size:35px">
         Авторизация
       </v-card-title>
-      <v-form>
+      <v-form @submit.prevent="onSubmit">
         <v-row justify="center">
           <v-col cols="12" sm="8" class="pt-0 pb-0 ">
             <v-text-field
+              v-model.trim="email"
+              :error-messages="emailErrors"
+              @blur="$v.email.$touch()"
+              required
               label="Почта"
-              v-model="email"
               class="pl-5 pr-5"
             ></v-text-field>
           </v-col>
           <v-col cols="12" sm="8" class="pt-2 pb-0">
             <v-text-field
-              label="Пароль"
               v-model="password"
+              :type="showPassword ? 'text' : 'password'"
+              :error-messages="passwordErrors"
+              @blur="$v.password.$touch()"
+              required
+              label="Пароль"
               class="pl-5 pr-5"
             ></v-text-field>
           </v-col>
@@ -43,13 +50,47 @@
 </template>
 
 <script>
+import { required, minLength, email } from "vuelidate/lib/validators";
 export default {
   name: "Login",
   data() {
     return {
       email: "",
-      password: ""
+      password: "",
+      showPassword: false
     };
+  },
+  methods: {
+    onSubmit() {
+      console.log("submit");
+    }
+  },
+  computed: {
+    emailErrors() {
+      const errors = [];
+      if (!this.$v.email.$dirty) return errors;
+      !this.$v.email.email && errors.push("Неправильная почта");
+      !this.$v.email.required && errors.push("Это поле обязательно");
+      return errors;
+    },
+    passwordErrors() {
+      const errors = [];
+      if (!this.$v.password.$dirty) return errors;
+      !this.$v.password.minLength &&
+        errors.push("Пароль должен быть длиннее 6 символов");
+      !this.$v.password.required && errors.push("Это поле обязательно");
+      return errors;
+    }
+  },
+  validations: {
+    email: {
+      required,
+      email
+    },
+    password: {
+      required,
+      minLength: minLength(6)
+    }
   }
 };
 </script>
