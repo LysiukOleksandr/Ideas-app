@@ -62,7 +62,26 @@ export default {
   },
   methods: {
     onSubmit() {
-      console.log("submit");
+      this.$v.$touch();
+      if (!this.$v.$invalid) {
+        console.log("SUBMIT");
+        const userData = {
+          email: this.email,
+          password: this.password
+        };
+        this.$store
+          .dispatch("signIn", userData)
+          .then(() => {
+            alert("Вы успешно вошли");
+            this.$router.push("/");
+          })
+          .catch(() => {
+            this.email = "";
+            this.password = "";
+          });
+      } else {
+        alert("Введите почту и пароль");
+      }
     }
   },
   computed: {

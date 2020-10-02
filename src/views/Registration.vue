@@ -82,7 +82,6 @@ export default {
             this.$router.push("/");
           })
           .catch(() => {
-            alert(this.$store.getters.getError);
             this.email = "";
             this.password = "";
             this.confirmPassword = "";
@@ -136,5 +135,3 @@ export default {
   }
 };
 </script>
-
-<style></style>
