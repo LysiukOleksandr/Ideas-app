@@ -60,13 +60,7 @@ export default {
       elem: 1,
       items: [
         { text: "Главная", icon: "mdi-home", route: "/" },
-        { text: "О проекте", icon: "mdi-information", route: "/about" },
-        {
-          text: "Регистрация",
-          icon: "mdi-account-plus",
-          route: "/registration"
-        },
-        { text: "Вход", icon: "mdi-login", route: "/login" }
+        { text: "О проекте", icon: "mdi-information", route: "/about" }
       ]
     };
   },

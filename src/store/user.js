@@ -42,6 +42,13 @@ export default {
         email: email
       };
       commit("SET_USER", userData);
+    },
+    loggedUser({ commit }, payload) {
+      const userData = {
+        userId: payload.uid,
+        email: payload.email
+      };
+      commit("SET_USER", userData);
     }
   },
   getters: {
