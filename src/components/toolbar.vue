@@ -17,7 +17,7 @@
       >
         Войти
       </v-btn>
-      <v-btn text color="white" class="mr-5" v-else>
+      <v-btn text color="white" class="mr-5" v-else @click="logOut">
         Log out
       </v-btn>
       <h4>{{ getEmail }}</h4>
@@ -63,6 +63,17 @@ export default {
         { text: "О проекте", icon: "mdi-information", route: "/about" }
       ]
     };
+  },
+  methods: {
+    logOut() {
+      const confirmLogOut = confirm(
+        "Вы действительно хотите покинуть приложение?"
+      );
+      if (confirmLogOut) {
+        this.$store.dispatch("signOut");
+        this.$router.push("/login");
+      }
+    }
   },
   computed: {
     getEmail() {

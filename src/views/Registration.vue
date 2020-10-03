@@ -79,7 +79,7 @@ export default {
           .dispatch("registerUser", user)
           .then(() => {
             alert("Вы успешно зарегистрированы");
-            this.$router.push("/");
+            // this.$router.push("/");
           })
           .catch(() => {
             this.email = "";

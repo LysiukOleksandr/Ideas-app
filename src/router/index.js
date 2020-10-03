@@ -23,22 +23,12 @@ const routes = [
   {
     path: "/login",
     name: "Login",
-    component: Login,
-    beforeEnter(to, from, next) {
-      if (store.getters.checkUser) {
-        next("/");
-      }
-    }
+    component: Login
   },
   {
     path: "/registration",
     name: "Registration",
-    component: Registration,
-    beforeEnter(to, from, next) {
-      if (store.getters.checkUser) {
-        next("/");
-      }
-    }
+    component: Registration
   }
 ];
 

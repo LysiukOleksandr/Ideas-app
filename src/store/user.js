@@ -13,6 +13,12 @@ export default {
         userId: userId,
         email: email
       };
+    },
+    SIGN_OUT(state) {
+      state.user = {
+        userId: null,
+        email: null
+      };
     }
   },
   actions: {
@@ -27,7 +33,6 @@ export default {
         userId: user.user.uid,
         email: email
       };
-      console.log(user);
       commit("SET_USER", userData);
     },
     async signIn({ commit }, { email, password }) {
@@ -42,6 +47,17 @@ export default {
         email: email
       };
       commit("SET_USER", userData);
+    },
+    signOut({ commit }) {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          commit("SIGN_OUT");
+        })
+        .catch(error => {
+          console.log(error);
+        });
     },
     loggedUser({ commit }, payload) {
       const userData = {

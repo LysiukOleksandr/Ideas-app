@@ -73,7 +73,7 @@ export default {
           .dispatch("signIn", userData)
           .then(() => {
             alert("Вы успешно вошли");
-            this.$router.push("/");
+            // this.$router.push("/");
           })
           .catch(() => {
             this.email = "";
