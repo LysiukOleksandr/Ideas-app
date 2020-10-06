@@ -1,3 +1,5 @@
+import { db } from "../main";
+
 export default {
   state: {
     ideas: []
@@ -5,6 +7,9 @@ export default {
   mutations: {
     ADD_IDEA(state, payload) {
       state.ideas.push(payload);
+    },
+    SET_IDEAS(state, payload) {
+      state.ideas = payload;
     }
   },
   actions: {
@@ -23,8 +28,22 @@ export default {
         likes: 0,
         category: "last"
       };
-      console.log(payload);
       commit("ADD_IDEA", payload);
+    },
+    async getIdeasFromStore({ commit }) {
+      let ideasData = [];
+      await db
+        .collection("ideas")
+        .get()
+        .then(response => {
+          response.forEach(item => {
+            ideasData.push(item.data());
+          });
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      commit("SET_IDEAS", ideasData);
     }
   },
   getters: {

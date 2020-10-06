@@ -29,6 +29,9 @@ export default {
     ideas() {
       return this.$store.getters.getIdeas;
     }
+  },
+  created: function() {
+    this.$store.dispatch("getIdeasFromStore");
   }
 };
 </script>

@@ -23,6 +23,8 @@ firebase.initializeApp({
   appId: "1:703222182249:web:155e2d47ebd8ba632e4df8"
 });
 
+export let db = firebase.firestore();
+
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     store.dispatch("loggedUser", user);
