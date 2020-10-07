@@ -5,15 +5,12 @@ export default {
     ideas: []
   },
   mutations: {
-    ADD_IDEA(state, payload) {
-      state.ideas.push(payload);
-    },
     SET_IDEAS(state, payload) {
       state.ideas = payload;
     }
   },
   actions: {
-    uploadIdea({ commit, state }, { title, description, userEmail }) {
+    uploadIdea({ state }, { title, description, userEmail }) {
       let today = new Date();
       const day = String(today.getDate()).padStart(2, "0");
       const month = String(today.getMonth() + 1).padStart(2, "0");
@@ -25,10 +22,15 @@ export default {
         description,
         userEmail,
         date: today,
-        likes: 0,
+        likes: {
+          likesCount: 0,
+          likedIt: []
+        },
         category: "last"
       };
-      commit("ADD_IDEA", payload);
+      db.collection("ideas")
+        .doc(`${state.ideas.length}`)
+        .set(payload);
     },
     async getIdeasFromStore({ commit }) {
       let ideasData = [];
@@ -44,6 +46,37 @@ export default {
           console.log(error);
         });
       commit("SET_IDEAS", ideasData);
+    },
+    likePost(payload) {
+      let docRef = db.collection("ideas").doc(`${payload.id}`);
+      let userEmail = payload.userEmail;
+      docRef
+        .get()
+        .then(function(doc) {
+          let array = doc.data().likes.likedIt;
+          let count = doc.data().likes.likesCount;
+          if (doc.data().likes.likedIt.indexOf(userEmail) != -1) {
+            const elemIndex = array.findIndex(item => item === userEmail); // find userEmail index
+            array.splice(elemIndex, 1); // delete userEmail from array by index
+            docRef.update({
+              likes: {
+                likesCount: count - 1,
+                likedIt: array
+              }
+            });
+          } else {
+            array.push(userEmail);
+            docRef.update({
+              likes: {
+                likesCount: count + 1,
+                likedIt: array
+              }
+            });
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     }
   },
   getters: {

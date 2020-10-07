@@ -16,11 +16,10 @@
         sm="2"
         class="d-flex flex-column align-center justify-center"
       >
-        <v-btn icon>
+        <v-btn icon @click="onLike">
           <v-icon color="orange darken-1">mdi-thumb-up</v-icon>
         </v-btn>
-
-        <div style="font-weight:700">{{ likes }}</div>
+        <div style="font-weight:700">{{ likes.likesCount }}</div>
       </v-col>
     </v-row>
   </v-layout>
@@ -35,8 +34,34 @@ export default {
     description: String,
     date: String,
     user: String,
-    likes: Number,
+    likes: Object,
     category: String
+  },
+  data() {
+    return {
+      active: this.isLiked
+    };
+  },
+  methods: {
+    onLike() {
+      const payload = {
+        id: this.id,
+        userEmail: this.getUserEmail
+      };
+      this.$store
+        .dispatch("likePost", payload)
+        .then(() => {
+          this.$store.dispatch("getIdeasFromStore");
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+  },
+  computed: {
+    getUserEmail() {
+      return this.$store.getters.getEmail;
+    }
   }
 };
 </script>

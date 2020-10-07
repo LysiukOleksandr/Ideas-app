@@ -50,6 +50,7 @@ export default {
         userEmail: this.$store.getters.getEmail
       };
       this.$store.dispatch("uploadIdea", idea);
+      this.$store.dispatch("getIdeasFromStore");
     }
   }
 };
