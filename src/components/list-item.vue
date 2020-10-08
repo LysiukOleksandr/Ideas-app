@@ -16,6 +16,9 @@
         sm="2"
         class="d-flex flex-column align-center justify-center"
       >
+        <v-btn icon v-if="getRole" @click="onClickListItem">
+          <v-icon color="red">mdi-delete</v-icon>
+        </v-btn>
         <v-btn icon @click="onLike">
           <v-icon color="orange darken-1">mdi-thumb-up</v-icon>
         </v-btn>
@@ -39,7 +42,8 @@ export default {
   },
   data() {
     return {
-      active: this.isLiked
+      active: this.isLiked,
+      isModalOpen: false
     };
   },
   methods: {
@@ -56,11 +60,22 @@ export default {
         .catch(error => {
           console.log(error);
         });
+    },
+    onClickListItem() {
+      const answer = confirm(
+        `Вы действительно хотите удалить пост "${this.title}"?`
+      );
+      if (answer) {
+        this.$store.dispatch("deleteIdea", this.id);
+      }
     }
   },
   computed: {
     getUserEmail() {
       return this.$store.getters.getEmail;
+    },
+    getRole() {
+      return this.$store.getters.getRole;
     }
   }
 };

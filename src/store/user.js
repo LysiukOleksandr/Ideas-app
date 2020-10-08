@@ -86,6 +86,9 @@ export default {
         userEmail: state.user.email,
         role: state.user.isAdmin === true ? "Admin" : "User"
       };
+    },
+    getRole: state => {
+      return state.user.isAdmin;
     }
   }
 };

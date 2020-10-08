@@ -93,6 +93,15 @@ export default {
           console.log(error);
         });
       commit("SET_IDEAS", ideasData);
+    },
+    deleteIdea({ commit, state }, payload) {
+      db.collection("ideas")
+        .doc(`${payload}`)
+        .delete()
+        .then(function() {
+          const newIdeasArray = state.ideas.filter(idea => idea.id !== payload);
+          commit("SET_IDEAS", newIdeasArray);
+        });
     }
   },
   getters: {
