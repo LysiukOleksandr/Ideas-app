@@ -10,7 +10,12 @@
         xl="1"
         class="pl-1 pr-1"
       >
-        <v-btn width="100%" color="primary">{{ category.name }}</v-btn>
+        <v-btn
+          width="100%"
+          color="primary"
+          @click="thisCategory(category.category)"
+          >{{ category.name }}</v-btn
+        >
       </v-col>
     </v-row>
   </v-container>
@@ -27,6 +32,11 @@ export default {
         { id: 3, name: "Закрыто", category: "closed" }
       ]
     };
+  },
+  methods: {
+    thisCategory(category) {
+      this.$store.dispatch("getActiveCategory", category);
+    }
   }
 };
 </script>

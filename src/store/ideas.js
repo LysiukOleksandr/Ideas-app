@@ -47,7 +47,7 @@ export default {
         });
       commit("SET_IDEAS", ideasData);
     },
-    likePost(payload) {
+    likePost(_, payload) {
       let docRef = db.collection("ideas").doc(`${payload.id}`);
       let userEmail = payload.userEmail;
       docRef
@@ -77,6 +77,22 @@ export default {
         .catch(function(error) {
           console.log(error);
         });
+    },
+    async getActiveCategory({ commit }, payload) {
+      let ideasData = [];
+      const ideasRef = db.collection("ideas");
+      await ideasRef
+        .where("category", "==", `${payload}`)
+        .get()
+        .then(function(querySnapshot) {
+          querySnapshot.forEach(function(item) {
+            ideasData.push(item.data());
+          });
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+      commit("SET_IDEAS", ideasData);
     }
   },
   getters: {
