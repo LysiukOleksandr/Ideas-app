@@ -4,20 +4,23 @@ export default {
   state: {
     user: {
       userId: null,
-      email: null
+      email: null,
+      isAdmin: null
     }
   },
   mutations: {
-    SET_USER(state, { userId, email }) {
+    SET_USER(state, { userId, email, isAdmin }) {
       state.user = {
         userId: userId,
-        email: email
+        email: email,
+        isAdmin: isAdmin
       };
     },
     SIGN_OUT(state) {
       state.user = {
         userId: null,
-        email: null
+        email: null,
+        isAdmin: null
       };
     }
   },
@@ -29,9 +32,11 @@ export default {
         .catch(error => {
           alert(error.message);
         });
+
       const userData = {
         userId: user.user.uid,
-        email: email
+        email: email,
+        isAdmin: email === "admin@gmail.com" ? true : false
       };
       commit("SET_USER", userData);
     },
@@ -44,7 +49,8 @@ export default {
         });
       const userData = {
         userId: user.user.uid,
-        email: email
+        email: email,
+        isAdmin: email === "admin@gmail.com" ? true : false
       };
       commit("SET_USER", userData);
     },
@@ -62,7 +68,8 @@ export default {
     loggedUser({ commit }, payload) {
       const userData = {
         userId: payload.uid,
-        email: payload.email
+        email: payload.email,
+        isAdmin: payload.email === "admin@gmail.com" ? true : false
       };
       commit("SET_USER", userData);
     }
@@ -73,6 +80,12 @@ export default {
     },
     checkUser: state => {
       return state.user.userId !== null;
+    },
+    getUserDetails: state => {
+      return {
+        userEmail: state.user.email,
+        role: state.user.isAdmin === true ? "Admin" : "User"
+      };
     }
   }
 };

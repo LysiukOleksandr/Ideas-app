@@ -30,6 +30,11 @@
       dark
       overlay-opacity="0.7"
     >
+      <div class="text-center">
+        <v-avatar color="white" size="60" class="mt-2">VJ</v-avatar>
+        <h4 class="mt-2">{{ getUserDetails.userEmail }}</h4>
+        <p class="mt-2 mb-2">{{ getUserDetails.role }}</p>
+      </div>
       <v-list>
         <v-list-item-group v-model="elem">
           <v-list-item
@@ -81,6 +86,9 @@ export default {
     },
     checkUser() {
       return this.$store.getters.checkUser;
+    },
+    getUserDetails() {
+      return this.$store.getters.getUserDetails;
     }
   }
 };
