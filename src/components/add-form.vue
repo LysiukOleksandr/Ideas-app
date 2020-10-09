@@ -51,6 +51,8 @@ export default {
       };
       this.$store.dispatch("uploadIdea", idea);
       this.$store.dispatch("getIdeasFromStore");
+      this.title = "";
+      this.description = "";
     }
   }
 };

@@ -24,6 +24,9 @@
           <v-btn color="green darken-1" text @click="onClick()">
             Подтвердить
           </v-btn>
+          <v-btn color="red" text @click="dialog = false">
+            Закрыть
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -47,19 +50,23 @@ export default {
   },
   methods: {
     onClick() {
-      const payload = {
-        id: this.id,
-        category: this.value
-      };
-      this.$store
-        .dispatch("changeIdeaCategory", payload)
-        .then(() => {
-          this.$store.dispatch("getIdeasFromStore");
-        })
-        .catch(err => {
-          console.log(err);
-        });
-      this.dialog = false;
+      if (this.value === "") {
+        alert("Выберите категорию");
+      } else {
+        const payload = {
+          id: this.id,
+          category: this.value
+        };
+        this.$store
+          .dispatch("changeIdeaCategory", payload)
+          .then(() => {
+            this.$store.dispatch("getIdeasFromStore");
+          })
+          .catch(err => {
+            console.log(err);
+          });
+        this.dialog = false;
+      }
     }
   }
 };
