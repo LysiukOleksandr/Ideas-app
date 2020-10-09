@@ -10,17 +10,17 @@
       <v-btn
         text
         color="white"
-        class="mr-5 pl-0"
+        class="mr-5"
         router
         to="/login"
         v-if="!checkUser"
       >
         Войти
       </v-btn>
-      <v-btn text color="white" class="mr-5 pl-0" v-else @click="logOut">
+      <v-btn text color="white" class="mr-5" v-else @click="logOut">
         Log out
       </v-btn>
-      <h4>{{ getEmail }}</h4>
+      <h4 class="toolbar-email">{{ getEmail }}</h4>
     </v-toolbar>
     <v-navigation-drawer
       v-model="drawer"
@@ -93,3 +93,11 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+.toolbar-email {
+  @media screen and(max-width:600px) {
+    display: none;
+  }
+}
+</style>
