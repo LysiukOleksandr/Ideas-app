@@ -1,8 +1,15 @@
 <template>
-  <v-row justify="center">
+  <v-row justify="center" class="flex-grow-0 flex-shrink-1">
     <v-dialog v-model="dialog" persistent max-width="310">
       <template v-slot:activator="{ on, attrs }">
-        <v-btn icon color="primary" dark v-bind="attrs" v-on="on">
+        <v-btn
+          class="mr-2 mr-sm-0"
+          icon
+          color="primary"
+          dark
+          v-bind="attrs"
+          v-on="on"
+        >
           <v-icon color="grey">mdi-cursor-move</v-icon>
         </v-btn>
       </template>

@@ -1,7 +1,7 @@
 <template>
   <v-layout>
     <v-row>
-      <v-col cols="12" sm="10" class="pt-0 pb-0">
+      <v-col cols="12" sm="10" class="pt-0 pb-0 ">
         <v-card-title style="color:orange">{{ title }}</v-card-title>
         <v-card-text>
           {{ description }}
@@ -14,7 +14,7 @@
       <v-col
         cols="12"
         sm="2"
-        class="d-flex flex-column align-center justify-center"
+        class="d-flex flex-row flex-sm-column align-center justify-center"
       >
         <settings-modal v-if="getRole" :id="id"></settings-modal>
         <v-btn icon v-if="getRole" @click="onClickListItem">
@@ -23,11 +23,14 @@
         <v-btn icon @click="onLike">
           <v-icon color="orange darken-1">mdi-thumb-up</v-icon>
         </v-btn>
-        <div style="font-weight:700">{{ likes.likesCount }}</div>
+        <div style="font-weight:700;">
+          {{ likes.likesCount }}
+        </div>
       </v-col>
     </v-row>
   </v-layout>
 </template>
+// class="d-flex flex-column align-center justify-center"
 
 <script>
 import SettingsModal from "./settings-modal";

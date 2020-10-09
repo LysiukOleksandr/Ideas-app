@@ -10,14 +10,14 @@
       <v-btn
         text
         color="white"
-        class="mr-5"
+        class="mr-5 pl-0"
         router
         to="/login"
         v-if="!checkUser"
       >
         Войти
       </v-btn>
-      <v-btn text color="white" class="mr-5" v-else @click="logOut">
+      <v-btn text color="white" class="mr-5 pl-0" v-else @click="logOut">
         Log out
       </v-btn>
       <h4>{{ getEmail }}</h4>
