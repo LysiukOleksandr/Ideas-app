@@ -16,6 +16,7 @@
         sm="2"
         class="d-flex flex-column align-center justify-center"
       >
+        <settings-modal v-if="getRole" :id="id"></settings-modal>
         <v-btn icon v-if="getRole" @click="onClickListItem">
           <v-icon color="red">mdi-delete</v-icon>
         </v-btn>
@@ -29,8 +30,12 @@
 </template>
 
 <script>
+import SettingsModal from "./settings-modal";
 export default {
   name: "list-item",
+  components: {
+    "settings-modal": SettingsModal
+  },
   props: {
     id: Number,
     title: String,
@@ -42,8 +47,7 @@ export default {
   },
   data() {
     return {
-      active: this.isLiked,
-      isModalOpen: false
+      active: this.isLiked
     };
   },
   methods: {

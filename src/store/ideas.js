@@ -102,6 +102,16 @@ export default {
           const newIdeasArray = state.ideas.filter(idea => idea.id !== payload);
           commit("SET_IDEAS", newIdeasArray);
         });
+    },
+    changeIdeaCategory(_, payload) {
+      let ideasRef = db.collection("ideas").doc(`${payload.id}`);
+      ideasRef
+        .update({
+          category: payload.category
+        })
+        .then(() => {
+          alert("Категория для идеи была изменена");
+        });
     }
   },
   getters: {
