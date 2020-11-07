@@ -2,11 +2,15 @@ import { db } from "../main";
 
 export default {
   state: {
-    ideas: []
+    ideas: [],
+    currentCategory: "last"
   },
   mutations: {
     SET_IDEAS(state, payload) {
       state.ideas = payload;
+    },
+    SET_CURRENT_CATEGORY(state, payload) {
+      state.currentCategory = payload;
     }
   },
   actions: {
@@ -79,6 +83,7 @@ export default {
         });
     },
     async getActiveCategory({ commit }, payload) {
+      commit("SET_CURRENT_CATEGORY", payload);
       let ideasData = [];
       const ideasRef = db.collection("ideas");
       await ideasRef
@@ -103,7 +108,8 @@ export default {
           commit("SET_IDEAS", newIdeasArray);
         });
     },
-    changeIdeaCategory(_, payload) {
+    changeIdeaCategory({ commit }, payload) {
+      commit("SET_CURRENT_CATEGORY", payload.category);
       let ideasRef = db.collection("ideas").doc(`${payload.id}`);
       ideasRef
         .update({
@@ -120,6 +126,9 @@ export default {
   getters: {
     getIdeas: state => {
       return state.ideas;
+    },
+    getCurrentCategory: state => {
+      return state.currentCategory;
     }
   }
 };
