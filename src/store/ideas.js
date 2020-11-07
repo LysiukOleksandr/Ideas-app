@@ -111,6 +111,9 @@ export default {
         })
         .then(() => {
           alert("Категория для идеи была изменена");
+        })
+        .catch(err => {
+          console.log(err);
         });
     }
   },

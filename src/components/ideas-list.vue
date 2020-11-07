@@ -30,7 +30,7 @@ export default {
       return this.$store.getters.getIdeas;
     }
   },
-  created: function() {
+  mounted() {
     this.$store.dispatch("getIdeasFromStore");
   }
 };
