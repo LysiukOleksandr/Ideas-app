@@ -43,14 +43,14 @@ export default {
     };
   },
   methods: {
-    onSendIdea() {
+    async onSendIdea() {
       const idea = {
         title: this.title,
         description: this.description,
         userEmail: this.$store.getters.getEmail
       };
-      this.$store.dispatch("uploadIdea", idea);
-      this.$store.dispatch("getIdeasFromStore");
+      await this.$store.dispatch("uploadIdea", idea);
+      await this.$store.dispatch("getActiveCategory", "last");
       this.title = "";
       this.description = "";
     }

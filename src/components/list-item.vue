@@ -63,7 +63,6 @@ export default {
       };
       try {
         await this.$store.dispatch("likePost", payload);
-        // await this.$store.dispatch("getIdeasFromStore");
         await this.$store.dispatch(
           "getActiveCategory",
           this.getCurrentCategory

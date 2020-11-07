@@ -11,6 +11,7 @@
             :user="idea.userEmail"
             :likes="idea.likes"
             :category="idea.category"
+            :key="idea.id"
           ></list-item>
         </v-card>
       </v-col>
