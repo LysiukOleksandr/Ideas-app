@@ -1,4 +1,5 @@
 # ideas-app
+https://ideas-app-9541d.web.app/
 
 ## Project setup
 ```
