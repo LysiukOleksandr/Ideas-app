@@ -2,7 +2,7 @@
   <v-container>
     <v-row justify="center">
       <v-col cols="12" sm="8" md="6">
-        <v-card class="mt-5" v-for="idea in ideas" :key="idea.id">
+        <v-card class="mt-5" v-for="idea in getIdeas" :key="idea.id">
           <list-item
             :id="idea.id"
             :title="idea.title"
@@ -20,15 +20,14 @@
 
 <script>
 import ListItem from "./list-item.vue";
+import { mapGetters } from "vuex";
 export default {
   name: "ideas-list",
   components: {
     "list-item": ListItem
   },
   computed: {
-    ideas() {
-      return this.$store.getters.getIdeas;
-    }
+    ...mapGetters(["getIdeas"])
   },
   mounted() {
     // this.$store.dispatch("getIdeasFromStore");
