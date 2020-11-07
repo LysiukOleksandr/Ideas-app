@@ -31,7 +31,8 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch("getIdeasFromStore");
+    // this.$store.dispatch("getIdeasFromStore");
+    this.$store.dispatch("getActiveCategory", "last");
   }
 };
 </script>
