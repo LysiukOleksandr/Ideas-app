@@ -1,0 +1,6 @@
+diff a/src/components/add-form.vue b/src/components/add-form.vue	(rejected hunks)
+@@ -52,2 +52,2 @@ export default {
+-    await  this.$store.dispatch("uploadIdea", idea);
+-    await this.$store.dispatch('getActiveCategory', 'last')
++      await this.$store.dispatch("uploadIdea", idea);
++      await this.$store.dispatch("getActiveCategory", "last");
