@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import ListItem from "./list-item.vue";
 import { mapGetters } from "vuex";
+import ListItem from "./list-item.vue";
 export default {
   name: "ideas-list",
   components: {

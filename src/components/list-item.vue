@@ -33,7 +33,9 @@
 // class="d-flex flex-column align-center justify-center"
 
 <script>
+import { mapGetters } from "vuex";
 import SettingsModal from "./settings-modal";
+
 export default {
   name: "list-item",
   components: {
@@ -57,7 +59,7 @@ export default {
     async onLike() {
       const payload = {
         id: this.id,
-        userEmail: this.getUserEmail
+        userEmail: this.getEmail
       };
       try {
         await this.$store.dispatch("likePost", payload);
@@ -76,12 +78,7 @@ export default {
     }
   },
   computed: {
-    getUserEmail() {
-      return this.$store.getters.getEmail;
-    },
-    getRole() {
-      return this.$store.getters.getRole;
-    }
+    ...mapGetters(["getEmail", "getRole"])
   }
 };
 </script>
