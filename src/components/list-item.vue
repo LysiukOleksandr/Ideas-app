@@ -59,14 +59,12 @@ export default {
         id: this.id,
         userEmail: this.getUserEmail
       };
-      await this.$store.dispatch("likePost", payload);
-      await this.$store.dispatch("getIdeasFromStore");
-      // .then(() => {
-      //   this.$store.dispatch("getIdeasFromStore");
-      // })
-      // .catch(error => {
-      //   console.log(error);
-      // });
+      try {
+        await this.$store.dispatch("likePost", payload);
+        await this.$store.dispatch("getIdeasFromStore");
+      } catch {
+        console.log("Something went wrong");
+      }
     },
     onClickListItem() {
       const answer = confirm(
