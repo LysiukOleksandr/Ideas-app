@@ -54,19 +54,19 @@ export default {
     };
   },
   methods: {
-    onLike() {
+    async onLike() {
       const payload = {
         id: this.id,
         userEmail: this.getUserEmail
       };
-      this.$store
-        .dispatch("likePost", payload)
-        .then(() => {
-          this.$store.dispatch("getIdeasFromStore");
-        })
-        .catch(error => {
-          console.log(error);
-        });
+      await this.$store.dispatch("likePost", payload);
+      await this.$store.dispatch("getIdeasFromStore");
+      // .then(() => {
+      //   this.$store.dispatch("getIdeasFromStore");
+      // })
+      // .catch(error => {
+      //   console.log(error);
+      // });
     },
     onClickListItem() {
       const answer = confirm(
