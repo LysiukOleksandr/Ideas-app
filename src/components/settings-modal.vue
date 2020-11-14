@@ -19,6 +19,7 @@
         </v-card-title>
         <v-radio-group>
           <v-radio
+            class="ml-5"
             v-for="radio in items"
             :key="radio.id"
             :label="radio.label"
