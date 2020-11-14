@@ -20,9 +20,13 @@ export default {
       const month = String(today.getMonth() + 1).padStart(2, "0");
       const year = today.getFullYear();
       today = `${day}.${month}.${year}`;
-      const idArr = state.ideas.map(item => {
-        return item.id;
-      });
+      const idArr =
+        state.ideas.length === 0
+          ? [0]
+          : state.ideas.map(item => {
+              return item.id;
+            });
+      console.log(state.ideas.length);
 
       const lastId = Math.max(...idArr) + 1;
       console.log(lastId);
@@ -41,6 +45,7 @@ export default {
       db.collection("ideas")
         .doc(`${lastId}`)
         .set(payload);
+      console.log(state.ideas);
     },
     async getIdeasFromStore({ commit }) {
       let ideasData = [];

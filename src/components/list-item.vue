@@ -76,6 +76,7 @@ export default {
         `Вы действительно хотите удалить пост "${this.title}"?`
       );
       if (answer) {
+        console.log(this.id);
         this.$store.dispatch("deleteIdea", this.id);
       }
     }
