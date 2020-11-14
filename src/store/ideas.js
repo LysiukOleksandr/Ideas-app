@@ -20,8 +20,14 @@ export default {
       const month = String(today.getMonth() + 1).padStart(2, "0");
       const year = today.getFullYear();
       today = `${day}.${month}.${year}`;
+      const idArr = state.ideas.map(item => {
+        return item.id;
+      });
+
+      const lastId = Math.max(...idArr) + 1;
+      console.log(lastId);
       const payload = {
-        id: state.ideas.length,
+        id: lastId,
         title,
         description,
         userEmail,
@@ -33,7 +39,7 @@ export default {
         category: "last"
       };
       db.collection("ideas")
-        .doc(`${state.ideas.length}`)
+        .doc(`${lastId}`)
         .set(payload);
     },
     async getIdeasFromStore({ commit }) {

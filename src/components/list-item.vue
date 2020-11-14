@@ -17,7 +17,7 @@
         class="d-flex flex-row flex-sm-column align-center justify-center"
       >
         <settings-modal v-if="getRole" :id="id"></settings-modal>
-        <v-btn icon v-if="getRole" @click="onClickListItem">
+        <v-btn icon v-if="getRole" @click="onClickDeleteItem">
           <v-icon color="red">mdi-delete</v-icon>
         </v-btn>
         <v-btn icon @click="onLike">
@@ -71,7 +71,7 @@ export default {
         console.log("Something went wrong");
       }
     },
-    onClickListItem() {
+    onClickDeleteItem() {
       const answer = confirm(
         `Вы действительно хотите удалить пост "${this.title}"?`
       );
