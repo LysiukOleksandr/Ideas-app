@@ -127,6 +127,7 @@ export default {
           category: payload.category
         })
         .then(() => {
+          this.dispatch("getActiveCategory", payload.category);
           alert("Категория для идеи была изменена");
         })
         .catch(err => {
