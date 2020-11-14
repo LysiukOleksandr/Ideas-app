@@ -29,7 +29,11 @@
             ></v-textarea>
           </v-col>
           <v-col cols="12" sm="12" class="text-end pt-0 pb-5">
-            <v-btn type="submit" class="ml-5 mr-5" color="primary"
+            <v-btn
+              type="submit"
+              class="ml-5 mr-5"
+              color="primary"
+              :disabled="$v.$invalid"
               >Отправить</v-btn
             >
           </v-col>

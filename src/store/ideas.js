@@ -42,7 +42,6 @@ export default {
       db.collection("ideas")
         .doc(`${lastId}`)
         .set(payload);
-      console.log(state.ideas);
     },
     async getIdeasFromStore({ commit }) {
       let ideasData = [];
