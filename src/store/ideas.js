@@ -26,10 +26,7 @@ export default {
           : state.ideas.map(item => {
               return item.id;
             });
-      console.log(state.ideas.length);
-
       const lastId = Math.max(...idArr) + 1;
-      console.log(lastId);
       const payload = {
         id: lastId,
         title,

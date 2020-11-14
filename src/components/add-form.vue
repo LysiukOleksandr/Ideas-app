@@ -7,6 +7,9 @@
           <v-col cols="12" sm="12" class="pb-0 pt-0">
             <v-text-field
               v-model="title"
+              :error-messages="titleErrors"
+              @blur="$v.title.$touch()"
+              required
               class="pl-5 pr-5"
               color="black"
               placeholder="Заголовок темы"
@@ -15,6 +18,9 @@
           <v-col cols="12" sm="12" class="pt-0">
             <v-textarea
               v-model="description"
+              :error-messages="descriptionErrors"
+              @blur="$v.description.$touch()"
+              required
               class="pl-5 pr-5 pt-0"
               color="black"
               placeholder="Опишите подробно, какую тему вы хотите предложить для следующего видео"
@@ -34,6 +40,8 @@
 </template>
 
 <script>
+import { required, minLength, maxLength } from "vuelidate/lib/validators";
+
 export default {
   name: "add-form",
   data() {
@@ -44,15 +52,52 @@ export default {
   },
   methods: {
     async onSendIdea() {
-      const idea = {
-        title: this.title,
-        description: this.description,
-        userEmail: this.$store.getters.getEmail
-      };
-      await this.$store.dispatch("uploadIdea", idea);
-      await this.$store.dispatch("getActiveCategory", "last");
-      this.title = "";
-      this.description = "";
+      this.$v.$touch();
+      if (!this.$v.$invalid) {
+        const idea = {
+          title: this.title,
+          description: this.description,
+          userEmail: this.$store.getters.getEmail
+        };
+        await this.$store.dispatch("uploadIdea", idea);
+        await this.$store.dispatch("getActiveCategory", "last");
+        this.title = "";
+        this.description = "";
+      }
+    }
+  },
+  computed: {
+    titleErrors() {
+      const errors = [];
+      if (!this.$v.title.$dirty) return errors;
+      !this.$v.title.minLength && errors.push("Должно быть минимум 5 символов");
+      !this.$v.title.maxLength &&
+        errors.push("Должно быть не более чем 20 символов");
+      !this.$v.title.required && errors.push("Это поле обязательно");
+
+      return errors;
+    },
+    descriptionErrors() {
+      const errors = [];
+      if (!this.$v.description.$dirty) return errors;
+      !this.$v.description.minLength &&
+        errors.push("Должно быть минимум 10 символов");
+      !this.$v.description.maxLength &&
+        errors.push("Должно быть не более чем 50 символов");
+      !this.$v.description.required && errors.push("Это поле обязательно");
+      return errors;
+    }
+  },
+  validations: {
+    title: {
+      required,
+      minLength: minLength(5),
+      maxLength: maxLength(20)
+    },
+    description: {
+      required,
+      minLength: minLength(10),
+      maxLength: maxLength(50)
     }
   }
 };
